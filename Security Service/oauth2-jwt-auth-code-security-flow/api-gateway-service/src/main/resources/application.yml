@@ -1,0 +1,51 @@
+logging:
+  level:
+    org.springframework.security: DEBUG
+    
+    
+server:
+  port: 8443  
+  servlet:
+    context-path: /myapp
+    session:
+      cookie:
+        path: /myapp
+  ssl:
+    key-store-password: password
+    key-store: classpath:mykeystore.p12
+    key-store-type: PKCS12
+    key-alias: tomcat
+
+
+      
+      
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          webclient:
+            client-id: client
+            client-secret: secret123
+            client-name: Way2learn
+            scope: user_info,read
+            redirect-uri: https://localhost:8443/myapp/login/oauth2/code/way2learnappclient
+            client-authentication-method: basic
+            authorization-grant-type: authorization_code
+            provider: webclient-authserver-provider
+        provider:
+            webclient-authserver-provider:
+              token-uri: http://localhost:1245/auth/oauth/token
+              authorization-uri: http://localhost:1245/auth/oauth/authorize
+              user-info-uri: http://localhost:1245/auth/userinfo
+              user-name-attribute: username
+      
+  h2:
+    console:
+      path: /h2-console
+      enabled: true
+  jpa:    
+    hibernate:
+      ddl-auto: update
+
+    

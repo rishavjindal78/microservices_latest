@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: security-service
+
+server:
+  port: 9001
+  servlet:
+    contextPath: /auth
+
+security:
+  user:
+    password: password
+  oauth2:
+    resource:
+      filter-order: 1
+
+# Discovery Server Access
+
+
+logging:
+  level:
+    org.springframework.security: DEBUG
